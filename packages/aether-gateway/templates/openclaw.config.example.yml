@@ -13,7 +13,7 @@ channels:
   whatsapp:
     dmPolicy: pairing
     allowFrom:
-      - "+346000000000" # TODO: set your E.164 number
+      - "__AETHER_OWNER__" # TODO: set your E.164 number (e.g. +34616913348)
     groupPolicy: disabled
 
 web:
