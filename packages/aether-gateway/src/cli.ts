@@ -30,7 +30,8 @@ program
 program
   .command('init')
   .description('Create a starter OpenClaw config file in ~/.openclaw/config.yml (does not overwrite)')
-  .action(() => {
+  .option('--owner <e164>', 'Owner WhatsApp number in E.164 (e.g. +34616913348)')
+  .action(async (opts: { owner?: string }) => {
     const dir = join(os.homedir(), '.openclaw');
     const dst = join(dir, 'config.yml');
     const src = join(process.cwd(), 'packages', 'aether-gateway', 'templates', 'openclaw.config.example.yml');
@@ -40,9 +41,15 @@ program
       console.error(`Refusing to overwrite existing config: ${dst}`);
       process.exit(2);
     }
-    copyFileSync(src, dst);
+
+    // Write template with placeholder replacement.
+    const template = await import('node:fs/promises').then((m) => m.readFile(src, 'utf8'));
+    const owner = (opts.owner || '').trim();
+    const out = template.replaceAll('__AETHER_OWNER__', owner || '+34616913348');
+    await import('node:fs/promises').then((m) => m.writeFile(dst, out, 'utf8'));
+
     console.log(`Wrote: ${dst}`);
-    console.log('Next: edit config.yml, then run: aether whatsapp:login');
+    console.log('Next: run: aether whatsapp:login');
   });
 
 program
