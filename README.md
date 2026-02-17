@@ -1,25 +1,28 @@
-# Aether Agent (private bootstrap)
+# Aether Agent
 
-This repository is bootstrapping **Aether**: a next‑generation autonomous agent that combines:
+Aether is an autonomous AI agent that **builds, deploys, and manages full‑stack applications without prompts**, featuring **visual verification**, **secure identities**, and **headless browser control**.
 
-- **Agdi-dev** promptless multi‑agent dev flow (Q&A → plan → code → fix → deploy)
-- **OpenClaw** always‑on chat integrations (WhatsApp/Telegram/web), background tasks, tools/skills
+It’s a next‑generation hybrid of:
+- **Agdi-dev**: promptless, multi‑agent dev flow (Q&A → plan → code → fix → deploy)
+- **OpenClaw**: chat‑first, always‑on integrations (WhatsApp/Telegram/web), long‑running tasks, tools/skills
 
 ## Current state
 
-Source imports are staged under:
-- `vendor/openclaw/` (OpenClaw upstream snapshot)
-- `vendor/agdi-dev/` (Agdi-dev snapshot)
+We imported upstream snapshots for reference:
+- `vendor/openclaw/`
+- `vendor/agdi-dev/`
 
-Next step is to **extract + merge** the minimal pieces into a clean Aether architecture (not just vendoring).
+Next we’ll extract + rebrand into a clean Aether architecture (not just vendoring).
 
-## Roadmap (immediate)
+## Roadmap (near-term)
 
-1. Create `packages/aether-core` orchestrator (LangGraph-style workflow + agent roles)
-2. Create `packages/aether-gateway` (OpenClaw gateway rebrand + channel adapters)
-3. Create `packages/aether-devflow` (Agdi Q&A + planner/coder/fixer/deployer)
-4. Wire: chat message → auto Q&A → generate plan → execute in sandbox → deploy → verify (Playwright + Gemini)
+- [ ] Create `packages/aether-core` (orchestrator + agent roles)
+- [ ] Create `packages/aether-gateway` (chat-first gateway + channels)
+- [ ] Create `packages/aether-devflow` (Agdi Q&A + planner/coder/fixer/deployer)
+- [ ] Add Playwright headless browser runner + state persistence
+- [ ] Add Gemini-based visual verification and self-healing loop
+- [ ] Security: vault, sandboxing, audit logs, critical-command OTP
 
-## Notes
+## License
 
-This repo is private while we stabilize the foundation.
+MIT
