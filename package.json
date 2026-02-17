@@ -1,0 +1,13 @@
+{
+  "name": "aether-agent",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm -ws run build",
+    "lint": "npm -ws run lint",
+    "aether": "node packages/aether-gateway/dist/cli.js"
+  }
+}
