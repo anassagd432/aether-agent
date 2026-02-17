@@ -1,37 +1,25 @@
-# Aether Agent
+# Aether Agent (private bootstrap)
 
-Aether is an autonomous AI agent that **builds, deploys, and manages full‑stack applications without prompts**, featuring **visual verification**, **secure identities**, and **headless browser control**.
+This repository is bootstrapping **Aether**: a next‑generation autonomous agent that combines:
 
-It’s a next‑generation hybrid of:
-- **Agdi-dev**: promptless, multi‑agent dev flow (Q&A → plan → code → fix → deploy)
-- **OpenClaw**: chat‑first, always‑on integrations (WhatsApp/Telegram/web), long‑running tasks, and operational tooling
+- **Agdi-dev** promptless multi‑agent dev flow (Q&A → plan → code → fix → deploy)
+- **OpenClaw** always‑on chat integrations (WhatsApp/Telegram/web), background tasks, tools/skills
 
-## Vision
+## Current state
 
-Aether aims to be a practical “always-on” autonomous engineer:
-- Guided first-run Q&A (project goals, stack, target users)
-- Multi-agent workflows (planner/coder/fixer/deployer)
-- Automated deploys (Vercel/Netlify) + post-deploy checks
-- Headless browser automation (Playwright)
-- Visual verification loops (Gemini Vision)
-- Secure identity vault + audit logs
+Source imports are staged under:
+- `vendor/openclaw/` (OpenClaw upstream snapshot)
+- `vendor/agdi-dev/` (Agdi-dev snapshot)
 
-## Status
+Next step is to **extract + merge** the minimal pieces into a clean Aether architecture (not just vendoring).
 
-Bootstrapping the foundation (repo + architecture + initial integration).
+## Roadmap (immediate)
 
-## Roadmap (high-level)
+1. Create `packages/aether-core` orchestrator (LangGraph-style workflow + agent roles)
+2. Create `packages/aether-gateway` (OpenClaw gateway rebrand + channel adapters)
+3. Create `packages/aether-devflow` (Agdi Q&A + planner/coder/fixer/deployer)
+4. Wire: chat message → auto Q&A → generate plan → execute in sandbox → deploy → verify (Playwright + Gemini)
 
-- [ ] Import OpenClaw as base (monorepo + gateway + channels)
-- [ ] Integrate Agdi-dev promptless workflow + deploy logic
-- [ ] Add Playwright browser runner + state persistence
-- [ ] Add Gemini-based visual verification and self-healing loop
-- [ ] Security: vault, sandboxing, audit logs, critical-command OTP
+## Notes
 
-## Contributing
-
-PRs welcome. Keep changes small and documented.
-
-## License
-
-MIT
+This repo is private while we stabilize the foundation.

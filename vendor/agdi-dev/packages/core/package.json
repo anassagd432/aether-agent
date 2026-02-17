@@ -1,0 +1,35 @@
+{
+    "name": "@agdi/core",
+    "version": "1.0.0",
+    "description": "Core AI app generation logic for Agdi",
+    "type": "module",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "exports": {
+        ".": {
+            "import": "./dist/index.js",
+            "types": "./dist/index.d.ts"
+        }
+    },
+    "scripts": {
+        "build": "tsup src/index.ts --format esm --dts --clean",
+        "dev": "tsup src/index.ts --format esm --dts --watch",
+        "test": "echo 'No tests yet'"
+    },
+    "keywords": [
+        "ai",
+        "code-generation",
+        "llm",
+        "agdi"
+    ],
+    "author": "Agdi Systems Inc.",
+    "license": "MIT",
+    "devDependencies": {
+        "tsup": "^8.0.0",
+        "typescript": "^5.4.0"
+    },
+    "dependencies": {
+        "@google/genai": "^1.0.0",
+        "jszip": "^3.10.0"
+    }
+}
