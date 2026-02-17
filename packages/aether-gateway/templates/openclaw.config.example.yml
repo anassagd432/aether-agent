@@ -1,0 +1,15 @@
+# Aether Gateway (OpenClaw) config template
+#
+# 1) Copy this file to: ~/.openclaw/config.yml
+# 2) Fill in your WhatsApp credentials (or run WhatsApp QR login)
+# 3) Start gateway: `aether start`
+
+# Minimal example; you can also use OpenClaw's full config schema.
+
+whatsapp:
+  enabled: true
+  # accountId: "default"
+
+# Optional: restrict who can control the agent
+# allowlist:
+#   - "+346..."
