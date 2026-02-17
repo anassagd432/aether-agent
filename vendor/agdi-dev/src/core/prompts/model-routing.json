@@ -1,0 +1,209 @@
+{
+    "$schema": "Model routing configuration for Agdi",
+    "description": "Extracted from MoltBot - optimal model selection per task type",
+    "defaults": {
+        "provider": "anthropic",
+        "model": "claude-opus-4-5",
+        "contextWindow": 200000
+    },
+    "taskRouting": {
+        "planning": {
+            "description": "Complex planning, architecture decisions, multi-step reasoning",
+            "recommended": {
+                "provider": "anthropic",
+                "model": "claude-opus-4-5",
+                "reason": "Best reasoning depth and instruction following"
+            },
+            "alternatives": [
+                {
+                    "provider": "google",
+                    "model": "gemini-2.5-pro",
+                    "reason": "Large context (1M+), good for codebase analysis"
+                },
+                {
+                    "provider": "openai",
+                    "model": "o1",
+                    "reason": "Strong structured reasoning"
+                }
+            ],
+            "thinkLevel": "medium"
+        },
+        "coding": {
+            "description": "Writing code, refactoring, debugging",
+            "recommended": {
+                "provider": "anthropic",
+                "model": "claude-sonnet-4",
+                "reason": "Fast, accurate code generation"
+            },
+            "alternatives": [
+                {
+                    "provider": "anthropic",
+                    "model": "claude-opus-4-5",
+                    "reason": "More careful, better for complex refactors"
+                },
+                {
+                    "provider": "openai",
+                    "model": "gpt-4o",
+                    "reason": "Strong code completion"
+                }
+            ],
+            "thinkLevel": "low"
+        },
+        "review": {
+            "description": "Code review, security analysis, best practices",
+            "recommended": {
+                "provider": "anthropic",
+                "model": "claude-sonnet-4",
+                "reason": "Good balance of speed and thoroughness"
+            },
+            "alternatives": [
+                {
+                    "provider": "anthropic",
+                    "model": "claude-opus-4-5",
+                    "reason": "More thorough security analysis"
+                }
+            ],
+            "thinkLevel": "low"
+        },
+        "summarization": {
+            "description": "Summarizing code, docs, conversations",
+            "recommended": {
+                "provider": "anthropic",
+                "model": "claude-haiku-3-5",
+                "reason": "Fast, cheap, good at extraction"
+            },
+            "alternatives": [
+                {
+                    "provider": "groq",
+                    "model": "llama-3.3-70b-versatile",
+                    "reason": "Fastest inference, good for quick summaries"
+                }
+            ],
+            "thinkLevel": "off"
+        },
+        "instantReply": {
+            "description": "Quick acknowledgments, simple questions",
+            "recommended": {
+                "provider": "groq",
+                "model": "llama-3.3-70b-versatile",
+                "reason": "Sub-second inference, good enough quality"
+            },
+            "alternatives": [
+                {
+                    "provider": "anthropic",
+                    "model": "claude-haiku-3-5",
+                    "reason": "Fast fallback"
+                }
+            ],
+            "thinkLevel": "off"
+        },
+        "largeContext": {
+            "description": "Analyzing large codebases (>100k tokens)",
+            "recommended": {
+                "provider": "google",
+                "model": "gemini-2.5-pro",
+                "reason": "1M+ context window, optimized for large inputs"
+            },
+            "alternatives": [
+                {
+                    "provider": "anthropic",
+                    "model": "claude-opus-4-5",
+                    "reason": "200k context, better reasoning"
+                }
+            ],
+            "thinkLevel": "medium"
+        },
+        "imageAnalysis": {
+            "description": "Analyzing screenshots, diagrams, UI mockups",
+            "recommended": {
+                "provider": "anthropic",
+                "model": "claude-sonnet-4",
+                "reason": "Strong vision capabilities"
+            },
+            "alternatives": [
+                {
+                    "provider": "openai",
+                    "model": "gpt-4o",
+                    "reason": "Good vision, fast"
+                },
+                {
+                    "provider": "google",
+                    "model": "gemini-2.5-flash",
+                    "reason": "Fast vision, cost effective"
+                }
+            ],
+            "thinkLevel": "low"
+        }
+    },
+    "aliases": {
+        "fast": {
+            "provider": "groq",
+            "model": "llama-3.3-70b-versatile"
+        },
+        "smart": {
+            "provider": "anthropic",
+            "model": "claude-opus-4-5"
+        },
+        "balanced": {
+            "provider": "anthropic",
+            "model": "claude-sonnet-4"
+        },
+        "cheap": {
+            "provider": "anthropic",
+            "model": "claude-haiku-3-5"
+        },
+        "large": {
+            "provider": "google",
+            "model": "gemini-2.5-pro"
+        }
+    },
+    "thinkLevelMapping": {
+        "off": "No extended reasoning, fastest responses",
+        "low": "Brief internal reasoning for simple decisions",
+        "medium": "Structured reasoning for complex tasks",
+        "high": "Deep analysis with full chain of thought",
+        "stream": "Stream reasoning tokens to user in real-time"
+    },
+    "providerCapabilities": {
+        "anthropic": {
+            "supportsVision": true,
+            "supportsReasoning": true,
+            "maxContextWindow": 200000,
+            "strengths": [
+                "instruction following",
+                "code generation",
+                "reasoning"
+            ]
+        },
+        "google": {
+            "supportsVision": true,
+            "supportsReasoning": true,
+            "maxContextWindow": 2000000,
+            "strengths": [
+                "large context",
+                "speed",
+                "multimodal"
+            ]
+        },
+        "openai": {
+            "supportsVision": true,
+            "supportsReasoning": true,
+            "maxContextWindow": 128000,
+            "strengths": [
+                "code completion",
+                "structured output",
+                "vision"
+            ]
+        },
+        "groq": {
+            "supportsVision": false,
+            "supportsReasoning": false,
+            "maxContextWindow": 128000,
+            "strengths": [
+                "speed",
+                "cost",
+                "inference latency"
+            ]
+        }
+    }
+}
